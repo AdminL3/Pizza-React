@@ -33,14 +33,14 @@ export default function TabLayout() {
         headerShown: true,
         headerTintColor: 'white',
         headerTitleAlign: 'center',
-        headerRight: (focused) => (
-          <Link href="/cart" asChild>
+        headerRight: () => (
+          <Link href="/create" asChild>
             <Pressable>
               {({ pressed }) => (
                 <TabBarIcon
-                  name={'cart'}
+                  name={'create-outline'}
                   color={'#fff'}
-                  style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+                  style={{ marginRight: 25, opacity: pressed ? 0.5 : 1 }}
                 />
               )}
             </Pressable>
@@ -50,7 +50,20 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Pizza',
+          headerLeft: () => (
+            <Link href="/" asChild>
+              <Pressable>
+                {({ pressed }) => (
+                  <TabBarIcon
+                    name={'arrow-back-outline'}
+                    color={'#fff'}
+                    style={{ marginLeft: 15, opacity: pressed ? 0.2 : 1 }}
+                  />
+                )}
+              </Pressable>
+            </Link>
+          ),
+          title: 'Admin',
           tabBarIcon: ({ focused, color }) => (
             <TabBarIcon
               name={focused ? 'pizza' : 'pizza-outline'}
@@ -81,6 +94,15 @@ export default function TabLayout() {
         options={
           {
             title: 'Item Details',
+            href: null
+          }
+        } />
+      <Tabs.Screen
+        name="create"
+
+        options={
+          {
+            title: 'Create Product',
             href: null
           }
         } />

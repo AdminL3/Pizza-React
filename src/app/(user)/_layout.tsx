@@ -50,6 +50,19 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
+          headerLeft: () => (
+            <Link href="/" asChild>
+              <Pressable>
+                {({ pressed }) => (
+                  <TabBarIcon
+                    name={'arrow-back-outline'}
+                    color={'#fff'}
+                    style={{ marginLeft: 15, opacity: pressed ? 0.2 : 1 }}
+                  />
+                )}
+              </Pressable>
+            </Link>
+          ),
           title: 'Pizza',
           tabBarIcon: ({ focused, color }) => (
             <TabBarIcon
