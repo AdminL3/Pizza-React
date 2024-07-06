@@ -1,22 +1,76 @@
-import { StyleSheet, Text, TextInput, View } from 'react-native'
+import { Image, StyleSheet, Text, TextInput, View } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import CustomButton from '@/components/CustomButton'
+import { defaultPizzaImage } from '@/components/Product'
 
 const Create = () => {
+    const [name, setName] = React.useState('')
+    const [price, setPrice] = React.useState('')
+    const [error, setError] = React.useState('')
+
+
+    const validateInput = () => {
+        setError('')
+        if (name === '') {
+            setError('Name is required')
+            return false
+        }
+        if (price === '') {
+            setError('Price is required')
+            return false
+        }
+        if (isNaN(parseFloat(price))) {
+            setError('Price must be a number')
+            return false
+        }
+        return true
+    }
+    const resetInput = () => {
+        setName('')
+        setPrice('')
+    }
+
+
+    const oncreate = () => {
+        if (validateInput()) {
+            resetInput()
+        }
+
+    }
+
+
     return (
         <SafeAreaView style={{ height: '100%' }}>
             <View style={styles.container}>
+                <View>
+                    <Image source={{ uri: defaultPizzaImage }} style={styles.image} />
+                    <Text style={{ alignSelf: 'center', fontSize: 25, fontWeight: 500 }}>
+                        Select Image
+                    </Text>
+                </View>
                 <View style={styles.box}>
                     <Text style={styles.label}>Name:</Text>
-                    <TextInput placeholder='Name' style={styles.input} />
+                    <TextInput
+                        value={name}
+                        onChangeText={setName}
+                        placeholder='Name'
+                        style={styles.input}
+                    />
                 </View>
                 <View style={styles.box}>
                     <Text style={styles.label}>Price:</Text>
-                    <TextInput placeholder='9.99' style={styles.input} keyboardType='numeric' />
+                    <TextInput
+                        value={price}
+                        onChangeText={setPrice}
+                        placeholder='9.99'
+                        style={styles.input}
+                        keyboardType='numeric'
+                    />
                 </View>
+                <Text style={styles.error}>{error}</Text>
                 <View style={styles.btn}>
-                    <CustomButton text='Create' />
+                    <CustomButton onPress={oncreate} text='Create' />
 
                 </View>
             </View>
@@ -45,11 +99,20 @@ const styles = StyleSheet.create({
         color: 'grey',
     },
     image: {
-        width: '100%',
+        width: '60%',
         aspectRatio: 1,
+        alignSelf: 'center',
+
     },
     btn: {
         marginHorizontal: '5%',
         width: '90%',
     },
+    error: {
+        fontSize: 15,
+        color: 'red',
+        textAlign: 'left',
+        marginTop: 10,
+        marginLeft: 20,
+    }
 })
