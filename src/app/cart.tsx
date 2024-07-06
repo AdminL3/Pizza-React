@@ -39,8 +39,8 @@ export default CartScreen
 
 const styles = StyleSheet.create({
     cartbutton: {
-        width: '80%',
-        marginHorizontal: 35,
+        width: '90%',
+        marginHorizontal: '5%',
         position: 'relative',
         bottom: 20,
     },
