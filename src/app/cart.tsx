@@ -1,10 +1,11 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { useCart } from '@/provider/CartProvider'
 import CartListItem from '@/components/CartListItem';
-import { Stack } from 'expo-router';
+import { router, Stack } from 'expo-router';
 import CustomButton from '@/components/CustomButton';
 import Colors from '@/constants/Colors';
+import { TabBarIcon } from '@app/(user)/_layout';
 
 
 
@@ -15,6 +16,20 @@ const CartScreen = () => {
             <Stack.Screen
                 options={{
                     title: 'Cart',
+                    headerTitleAlign: 'center',
+                    headerTitleStyle: {
+                        color: '#fff',
+                    },
+                    headerBackground() {
+                        return (
+                            <View style={{ backgroundColor: '#161622', height: '100%' }} />
+                        )
+                    },
+                    headerLeft: () => (
+                        <Pressable onPress={() => router.back()}>
+                            <TabBarIcon name='arrow-back' color='#fff' size={28} />
+                        </Pressable>
+                    ),
                 }}
             />
             <FlatList
@@ -29,7 +44,7 @@ const CartScreen = () => {
                     <Text>Total Value:</Text>
                     <Text style={styles.price}>${total.toFixed(2)}</Text>
                 </View>
-                <CustomButton text='Add to Cart' />
+                <CustomButton text='Checkout' />
             </View>
         </View>
     );

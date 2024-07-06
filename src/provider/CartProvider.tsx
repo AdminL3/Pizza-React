@@ -37,8 +37,6 @@ const CartProvider = ({ children }: PropsWithChildren) => {
             updateQuantity(exisitingItem.id, 1);
             return;
         }
-
-        console.log(product, size, options);
         const newItem: CartItem = {
             id: randomUUID(),
             product,

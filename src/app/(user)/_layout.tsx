@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Tabs } from 'expo-router';
+import { Link, router, Tabs } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { type IconProps } from '@expo/vector-icons/build/createIconSet';
 import { type ComponentProps } from 'react';
