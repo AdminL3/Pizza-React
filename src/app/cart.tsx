@@ -27,7 +27,7 @@ const CartScreen = () => {
             <View style={styles.cartbutton} >
                 <View style={styles.prices}>
                     <Text>Total Value:</Text>
-                    <Text style={styles.price}>${total}</Text>
+                    <Text style={styles.price}>${total.toFixed(2)}</Text>
                 </View>
                 <CustomButton text='Add to Cart' />
             </View>
