@@ -15,12 +15,13 @@ const ProductDetails = () => {
     const sizes: PizzaSize[] = ['S', 'M', 'L', 'XL'];
     const [selectedSize, setselectedSize] = useState<PizzaSize>('M');
 
+    const [text, setText] = useState('');
     const router = useRouter();
 
     const scrollViewRef = useRef<ScrollView>(null);
     const addToCart = () => {
         if (!product) return console.log('Product not found')
-        addItem(product, selectedSize)
+        addItem(product, selectedSize, text)
         scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: true });
         router.push('/cart')
     };
@@ -92,6 +93,8 @@ const ProductDetails = () => {
 
                         <Text style={styles.sizeTitle}>Other Preferences:</Text>
                         <TextInput
+                            value={text}
+                            onChangeText={setText}
                             maxLength={30}
                             placeholder='No Onions'
                             style={{

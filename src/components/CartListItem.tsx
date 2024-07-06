@@ -34,6 +34,9 @@ const CartListItem = ({ cartItem }: CartListItemProps) => {
                 <View style={styles.subtitleContainer}>
                     <Text style={styles.price}>${cartItem.product.price.toFixed(2)}</Text>
                     <Text>Size: {cartItem.size}</Text>
+                    {cartItem.options && (
+                        <Text style={styles.extras}>Extras: {cartItem.options}</Text>
+                    )}
                 </View>
             </View>
             <View style={styles.quantitySelector}>
@@ -77,7 +80,7 @@ const styles = StyleSheet.create({
     },
     subtitleContainer: {
         flexDirection: 'row',
-        gap: 5,
+        gap: 10,
     },
     quantitySelector: {
         flexDirection: 'row',
@@ -93,6 +96,10 @@ const styles = StyleSheet.create({
         color: Colors.light.tint,
         fontWeight: 'bold',
     },
+    extras: {
+        color: '#ff8000',
+        fontWeight: 'bold',
+    }
 });
 
 export default CartListItem;
