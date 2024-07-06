@@ -1,31 +1,22 @@
-import { StyleSheet } from 'react-native';
+import { FlatList, View } from 'react-native';
 
-import EditScreenInfo from '@/components/EditScreenInfo';
-import { Text, View } from '@/components/Themed';
+import products from '@assets/data/products';
+import Product from '@components/Product';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Stack } from 'expo-router';
 
 export default function TabOneScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
-    </View>
+    <SafeAreaView style={{ backgroundColor: '#161622' }}>
+      <Stack />
+      <FlatList
+        style={{ marginTop: -20 }}
+        data={products}
+        renderItem={({ item }) => <Product product={item} />}
+        numColumns={2}
+        contentContainerStyle={{ gap: 10, padding: 10 }}
+        columnWrapperStyle={{ gap: 10 }}
+      />
+    </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});
