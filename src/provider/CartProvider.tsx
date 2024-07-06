@@ -7,7 +7,7 @@ import products from '@assets/data/products';
 
 type CartType = {
     items: CartItem[],
-    addItem: (product: Product, size: CartItem['size']) => void,
+    addItem: (product: Product, size: CartItem['size'], options: string) => void,
     updateQuantity: (itemId: string, amount: -1 | 1) => void,
     total: number,
 
@@ -29,37 +29,32 @@ const CartProvider = ({ children }: PropsWithChildren) => {
 
 
 
-    const addItem = (product: Product, size: CartItem['size']) => {
-
-
+    const addItem = (product: Product, size: CartItem['size'], options?: string) => {
         const exisitingItem = items.find(
-            item => item.product === product && item.size === size
+            item => item.product === product && item.size === size && item.options === options
         )
         if (exisitingItem) {
             updateQuantity(exisitingItem.id, 1);
             return;
         }
 
-
-        console.log(product, size);
+        console.log(product, size, options);
         const newItem: CartItem = {
             id: randomUUID(),
             product,
             product_id: product.id,
             size,
-            quantity: 1
+            quantity: 1,
+            options: options || ''
         }
         setItems([newItem, ...items])
     }
 
     const updateQuantity = (itemId: string, amount: -1 | 1) => {
-
         const updatedItems = items.map(
             item => item.id === itemId ? { ...item, quantity: item.quantity + amount } : item
         ).filter(item => item.quantity > 0)
         setItems(updatedItems)
-
-
     };
 
     const total = items.reduce((sum, item) => (sum += item.quantity * item.product.price), 0);
@@ -68,6 +63,7 @@ const CartProvider = ({ children }: PropsWithChildren) => {
             {children}
         </CartContext.Provider>
     );
+
 };
 
 export default CartProvider;
