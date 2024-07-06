@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Tabs } from 'expo-router';
+import { Link, router, Tabs } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { type IconProps } from '@expo/vector-icons/build/createIconSet';
 import { type ComponentProps } from 'react';
@@ -50,7 +50,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Admin',
+          title: 'Pizza',
           tabBarIcon: ({ focused, color }) => (
             <TabBarIcon
               name={focused ? 'pizza' : 'pizza-outline'}

@@ -2,7 +2,7 @@ import { Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TextInput
 import React, { useState, useRef } from 'react';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import products from '@assets/data/products';
-import { TabBarIcon } from '@/app/(tabs)/_layout';
+import { TabBarIcon } from '@/app/(user)/_layout';
 import CustomButton from '@/components/CustomButton';
 
 import { useCart } from '@/provider/CartProvider';
@@ -20,10 +20,11 @@ const ProductDetails = () => {
 
     const scrollViewRef = useRef<ScrollView>(null);
     const addToCart = () => {
-        if (!product) return console.log('Product not found')
-        addItem(product, selectedSize, text)
+        if (!product) return console.log('Product not found');
+        addItem(product, selectedSize, text);
+        setText('');
         scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: true });
-        router.push('/cart')
+        router.push('/cart');
     };
 
 
@@ -37,8 +38,8 @@ const ProductDetails = () => {
                 options={{
                     title: product?.name,
                     headerLeft: () => (
-                        <Pressable onPress={() => router.back()} style={{ marginLeft: 10 }}>
-                            <TabBarIcon name='arrow-back' color='#ff3399' size={40} />
+                        <Pressable onPress={() => router.back()} style={{ marginLeft: 20 }}>
+                            <TabBarIcon name='arrow-back' color='#fff' size={28} />
                         </Pressable>
                     ),
                 }}
