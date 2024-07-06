@@ -8,17 +8,17 @@ const products = [
   },
   {
     id: 2,
+    name: '6 Cheese',
+    image:
+      'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/food/6cheese.png',
+    price: 13.29,
+  },
+  {
+    id: 3,
     name: 'ExtravaganZZa',
     image:
       'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/food/extravaganzza.png',
     price: 14.99,
-  },
-  {
-    id: 3,
-    name: 'MeatZZa',
-    image:
-      'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/food/peperoni.png',
-    price: 13.47,
   },
   {
     id: 4,
@@ -61,13 +61,6 @@ const products = [
     image:
       'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/food/extravaganzza.png',
     price: 13.99,
-  },
-  {
-    id: 10,
-    name: '6 Cheese',
-    image:
-      'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/food/6cheese.png',
-    price: 13.29,
   },
 ];
 
