@@ -3,6 +3,30 @@ import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { Stack, useRouter } from 'expo-router';
 import CustomButton from '@components/CustomButton';
 
+export const checkValidation = (password: string, confirmPassword: string, email: string) => {
+    if (password !== confirmPassword) {
+        return 'Passwords do not match'
+    }
+    if (password.length < 6) {
+        return 'Password must be at least 6 characters';
+    }
+    if (password.length > 20) {
+        return 'Password must be less than 20 characters';
+    }
+    if (email.length < 4) {
+        return 'Email must be at least 6 characters';
+    }
+    if (email.length > 20) {
+        return 'Email must be less than 20 characters';
+    }
+    if (!email.includes('@')) {
+        return 'Email is not valid';
+    }
+    if (!email.includes('.')) {
+        return 'Email is not valid';
+    }
+    return true;
+}
 const SignUp = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -11,14 +35,11 @@ const SignUp = () => {
     const router = useRouter();
 
     const handleSignUp = () => {
-        if (password !== confirmPassword) {
-            setError('Passwords do not match');
+        const validationResult = checkValidation(password, confirmPassword, email);
+        if (validationResult !== true) {
+            setError(validationResult);
             return;
         }
-        // Add your sign-up logic here
-        console.log('Email:', email);
-        console.log('Password:', password);
-        // Navigate to the home page after successful sign-up
         router.push('(user)');
     };
 
@@ -56,8 +77,8 @@ const SignUp = () => {
             <View style={styles.btn}>
                 <CustomButton text="Sign Up" onPress={handleSignUp} style={styles.customButton} />
             </View>
-            <Text style={styles.signup} onPress={() => router.push('/(auth)/sign_in')}>
-                Already have an account? Sign In
+            <Text style={styles.signup} onPress={() => router.push('/pages/orders/')}>
+                {/* Already have an account? Sign In */}go to orders
             </Text>
             <Text style={styles.error}>
                 {error}

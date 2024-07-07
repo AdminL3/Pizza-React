@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { Stack, useRouter } from 'expo-router';
 import CustomButton from '@components/CustomButton';
+import { checkValidation } from './sign_up';
 
 const SignIn = () => {
     const [email, setEmail] = useState('');
@@ -10,11 +11,12 @@ const SignIn = () => {
     const router = useRouter();
 
     const handleSignIn = () => {
-        // Add your sign-in logic here
-        console.log('Email:', email);
-        console.log('Password:', password);
-        // Navigate to the home page after successful sign-in
-        router.push('/(user)');
+        const validationResult = checkValidation(password, password, email);
+        if (validationResult !== true) {
+            setError(validationResult);
+            return;
+        }
+        router.push('(user)');
     };
 
     return (
