@@ -27,7 +27,7 @@ const ProductDetails = () => {
                         </Pressable>
                     ),
                     headerRight: () => (
-                        <Link href={`/(admin)/create?id=${id}`} asChild>
+                        <Link href={`/pages/create?id=${id}`} asChild>
                             <Pressable style={{ marginRight: 20 }}>
                                 <TabBarIcon name='brush-outline' color='#fff' size={28} />
                             </Pressable>

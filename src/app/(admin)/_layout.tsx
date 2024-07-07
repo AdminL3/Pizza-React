@@ -34,7 +34,7 @@ export default function TabLayout() {
         headerTintColor: 'white',
         headerTitleAlign: 'center',
         headerRight: () => (
-          <Link href="/create" asChild>
+          <Link href="pages/create" asChild>
             <Pressable>
               {({ pressed }) => (
                 <TabBarIcon
@@ -94,14 +94,6 @@ export default function TabLayout() {
         options={
           {
             title: 'Item Details',
-            href: null
-          }
-        } />
-      <Tabs.Screen
-        name="create"
-
-        options={
-          {
             href: null
           }
         } />

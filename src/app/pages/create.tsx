@@ -99,43 +99,41 @@ const Create = () => {
     }
 
     return (
-        <SafeAreaView style={{ height: '100%' }}>
-            <ScrollView style={{ height: '100%' }}>
-                <Stack.Screen options={{ headerTitle: isupdating ? 'Update' : 'Create', headerRight: () => null }} />
-                <View style={styles.container}>
-                    <View>
-                        <Image source={{ uri: image ?? defaultPizzaImage }} style={styles.image} />
-                        <Text style={{ alignSelf: 'center', fontSize: 25, fontWeight: 'bold' }} onPress={pickImage}>
-                            Select Image
-                        </Text>
-                    </View>
-                    <View style={styles.box}>
-                        <Text style={styles.label}>Name:</Text>
-                        <TextInput
-                            value={name}
-                            onChangeText={setName}
-                            placeholder='Name'
-                            style={styles.input}
-                        />
-                    </View>
-                    <View style={styles.box}>
-                        <Text style={styles.label}>Price:</Text>
-                        <TextInput
-                            value={price}
-                            onChangeText={setPrice}
-                            placeholder='9.99'
-                            style={styles.input}
-                            keyboardType='numeric'
-                        />
-                    </View>
-                    <Text style={styles.error}>{error}</Text>
-                    <View style={styles.btn}>
-                        <CustomButton onPress={onSubmit} text={isupdating ? 'Update' : 'Create'} />
-                        {isupdating && <CustomButton onPress={onDelete} text='Delete' />}
-                    </View>
+        <ScrollView style={{ height: '100%' }}>
+            <Stack.Screen options={{ headerTitle: isupdating ? 'Update' : 'Create', headerRight: () => null }} />
+            <View style={styles.container}>
+                <View>
+                    <Image source={{ uri: image ?? defaultPizzaImage }} style={styles.image} />
+                    <Text style={{ alignSelf: 'center', fontSize: 25, fontWeight: 'bold' }} onPress={pickImage}>
+                        Select Image
+                    </Text>
                 </View>
-            </ScrollView>
-        </SafeAreaView>
+                <View style={styles.box}>
+                    <Text style={styles.label}>Name:</Text>
+                    <TextInput
+                        value={name}
+                        onChangeText={setName}
+                        placeholder='Name'
+                        style={styles.input}
+                    />
+                </View>
+                <View style={styles.box}>
+                    <Text style={styles.label}>Price:</Text>
+                    <TextInput
+                        value={price}
+                        onChangeText={setPrice}
+                        placeholder='9.99'
+                        style={styles.input}
+                        keyboardType='numeric'
+                    />
+                </View>
+                <Text style={styles.error}>{error}</Text>
+                <View style={styles.btn}>
+                    <CustomButton onPress={onSubmit} text={isupdating ? 'Update' : 'Create'} />
+                    {isupdating && <CustomButton onPress={onDelete} text='Delete' />}
+                </View>
+            </View>
+        </ScrollView>
     )
 }
 
