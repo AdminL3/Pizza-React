@@ -4,6 +4,15 @@ import { Stack, useRouter } from 'expo-router';
 import CustomButton from '@components/CustomButton';
 
 export const checkValidation = (password: string, confirmPassword: string, email: string) => {
+    if (!email.includes('@')) {
+        return 'Email is not valid';
+    }
+    if (email.length < 4) {
+        return 'Email must be at least 6 characters';
+    }
+    if (!email.includes('.')) {
+        return 'Email is not valid';
+    }
     if (password !== confirmPassword) {
         return 'Passwords do not match'
     }
@@ -13,17 +22,20 @@ export const checkValidation = (password: string, confirmPassword: string, email
     if (password.length > 20) {
         return 'Password must be less than 20 characters';
     }
-    if (email.length < 4) {
-        return 'Email must be at least 6 characters';
+    if (password.includes(' ')) {
+        return 'Password cannot contain spaces';
     }
-    if (email.length > 20) {
-        return 'Email must be less than 20 characters';
+    const specialSymbols = /[!@#$%^&*(),.?":{}|<>]/;
+    if (!specialSymbols.test(password)) {
+        return 'Password must contain at least one special symbol';
     }
-    if (!email.includes('@')) {
-        return 'Email is not valid';
+    const hasNumber = /\d/;
+    if (!hasNumber.test(password)) {
+        return 'Password must contain at least one number';
     }
-    if (!email.includes('.')) {
-        return 'Email is not valid';
+    const hasUppercase = /[A-Z]/;
+    if (!hasUppercase.test(password)) {
+        return 'Password must contain at least one uppercase letter';
     }
     return true;
 }
