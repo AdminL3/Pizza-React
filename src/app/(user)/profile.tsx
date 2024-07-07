@@ -5,10 +5,10 @@ export default function Profile() {
     <View style={styles.container}>
       <Stack.Screen options={{ headerTitle: 'Profile', headerRight: () => null }} />
       <View style={styles.box}>
-        <Link href="pages/orders" style={styles.title}>Orders</Link>
+        <Link href="/pages/orders" style={styles.title}>Orders</Link>
       </View>
       <View style={styles.box}>
-        <Link href="pages/settings" style={styles.title}>Settings</Link>
+        <Link href="/pages/settings" style={styles.title}>Settings</Link>
       </View>
     </View>
   );
