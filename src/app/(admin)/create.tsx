@@ -1,4 +1,4 @@
-import { Image, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Alert, Image, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import CustomButton from '@/components/CustomButton'
@@ -46,31 +46,44 @@ const Create = () => {
         }
         return true
     }
-    const resetInput = () => {
-        setName('')
-        setPrice('')
-    }
 
     const onSubmit = () => {
+        if (!validateInput()) {
+            return
+        }
         if (isupdating) {
             onUpdate()
         } else {
             onCreate()
         }
     }
-
+    const resetField = () => {
+        setError('')
+        setImage(null)
+        setName('')
+        setPrice('')
+    }
     const onUpdate = () => {
-        if (validateInput()) {
-            resetInput()
-        }
+
+
+        resetField()
     }
     const onCreate = () => {
-        if (validateInput()) {
-            resetInput()
-        }
 
+
+        resetField()
     }
 
+    const onDelete = () => {
+        Alert.alert('Are you sure?', 'Are you sure you want to delete this product?', [
+            { text: 'Cancel', style: 'cancel' },
+            {
+                text: 'Delete', style: 'destructive', onPress: () => {
+                    resetField()
+                }
+            }
+        ])
+    }
 
     return (
         <SafeAreaView style={{ height: '100%' }}>
@@ -105,7 +118,7 @@ const Create = () => {
                     <Text style={styles.error}>{error}</Text>
                     <View style={styles.btn}>
                         <CustomButton onPress={onSubmit} text={isupdating ? 'Update' : 'Create'} />
-
+                        {isupdating && <CustomButton onPress={onDelete} text='Delete' />}
                     </View>
                 </View>
             </ScrollView>
