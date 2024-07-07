@@ -63,26 +63,39 @@ const Create = () => {
         setName('')
         setPrice('')
     }
-    const onUpdate = () => {
-
-
-        resetField()
-    }
-    const onCreate = () => {
-
-
-        resetField()
-    }
-
     const onDelete = () => {
         Alert.alert('Are you sure?', 'Are you sure you want to delete this product?', [
             { text: 'Cancel', style: 'cancel' },
             {
                 text: 'Delete', style: 'destructive', onPress: () => {
-                    resetField()
+                    deleteProduct()
                 }
             }
         ])
+    }
+
+
+
+
+
+
+    const onUpdate = () => {
+        //update Product
+        Alert.alert('Success', 'Product updated successfully');
+        resetField();
+    }
+    const onCreate = () => {
+        //create Product
+
+        Alert.alert('Success', 'Product created successfully');
+        resetField()
+    }
+
+    const deleteProduct = () => {
+        // Logic to delete the product
+
+        Alert.alert('Success', 'Product deleted successfully');
+        resetField();
     }
 
     return (
