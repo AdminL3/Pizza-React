@@ -34,6 +34,9 @@ const CartListItem = ({ cartItem }: CartListItemProps) => {
                 <View style={styles.subtitleContainer}>
                     <Text style={styles.price}>${cartItem.product.price.toFixed(2)}</Text>
                     <Text>Size: {cartItem.size}</Text>
+
+                </View>
+                <View>
                     {cartItem.options && (
                         <Text style={styles.extras}>Extras: {cartItem.options}</Text>
                     )}
@@ -99,6 +102,8 @@ const styles = StyleSheet.create({
     extras: {
         color: '#ff8000',
         fontWeight: 'bold',
+        marginTop: 5,
+        fontSize: 13,
     }
 });
 
