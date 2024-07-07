@@ -102,7 +102,6 @@ export default function TabLayout() {
 
         options={
           {
-            title: 'Create Product',
             href: null
           }
         } />

@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import CustomButton from '@/components/CustomButton'
 import { defaultPizzaImage } from '@/components/Product'
 import * as ImagePicker from 'expo-image-picker';
+import { Stack, useLocalSearchParams } from 'expo-router'
 
 const Create = () => {
     const [name, setName] = React.useState('')
@@ -11,6 +12,8 @@ const Create = () => {
     const [error, setError] = React.useState('')
     const [image, setImage] = useState<string | null>(null);
 
+    const { id } = useLocalSearchParams();
+    const isupdating = !!id;
 
 
     const pickImage = async () => {
@@ -48,8 +51,20 @@ const Create = () => {
         setPrice('')
     }
 
+    const onSubmit = () => {
+        if (isupdating) {
+            onUpdate()
+        } else {
+            onCreate()
+        }
+    }
 
-    const oncreate = () => {
+    const onUpdate = () => {
+        if (validateInput()) {
+            resetInput()
+        }
+    }
+    const onCreate = () => {
         if (validateInput()) {
             resetInput()
         }
@@ -60,6 +75,7 @@ const Create = () => {
     return (
         <SafeAreaView style={{ height: '100%' }}>
             <ScrollView style={{ height: '100%' }}>
+                <Stack.Screen options={{ headerTitle: isupdating ? 'Update' : 'Create', headerRight: () => null }} />
                 <View style={styles.container}>
                     <View>
                         <Image source={{ uri: image ?? defaultPizzaImage }} style={styles.image} />
@@ -88,7 +104,7 @@ const Create = () => {
                     </View>
                     <Text style={styles.error}>{error}</Text>
                     <View style={styles.btn}>
-                        <CustomButton onPress={oncreate} text='Create' />
+                        <CustomButton onPress={onSubmit} text={isupdating ? 'Update' : 'Create'} />
 
                     </View>
                 </View>

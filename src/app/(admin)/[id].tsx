@@ -1,5 +1,5 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
-import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
+import { Link, Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import products from '@assets/data/products';
 import { TabBarIcon } from '@app/(user)/_layout';
 import CustomButton from '@components/CustomButton';
@@ -25,6 +25,13 @@ const ProductDetails = () => {
                         <Pressable onPress={() => router.back()} style={{ marginLeft: 20 }}>
                             <TabBarIcon name='arrow-back' color='#fff' size={28} />
                         </Pressable>
+                    ),
+                    headerRight: () => (
+                        <Link href={`/(admin)/create?id=${id}`} asChild>
+                            <Pressable style={{ marginRight: 20 }}>
+                                <TabBarIcon name='brush-outline' color='#fff' size={28} />
+                            </Pressable>
+                        </Link>
                     ),
                 }}
             />
