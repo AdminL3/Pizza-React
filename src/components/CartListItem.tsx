@@ -22,6 +22,10 @@ type CartListItemProps = {
 
 const CartListItem = ({ cartItem }: CartListItemProps) => {
     const { updateQuantity } = useCart();
+    const newprice =
+        cartItem ? cartItem.product.price + (
+            cartItem.size === 'S' ? -2 : (cartItem.size === 'L' ? 2 : (cartItem.size === 'XL' ? 4 : 0))
+        ) : 0;
     return (
         <View style={styles.container}>
             <Image
@@ -32,7 +36,7 @@ const CartListItem = ({ cartItem }: CartListItemProps) => {
             <View style={{ flex: 1 }}>
                 <Text style={styles.title}>{cartItem.product.name}</Text>
                 <View style={styles.subtitleContainer}>
-                    <Text style={styles.price}>${cartItem.product.price.toFixed(2)}</Text>
+                    <Text style={styles.price}>${newprice.toFixed(2)}</Text>
                     <Text>Size: {cartItem.size}</Text>
 
                 </View>

@@ -30,6 +30,10 @@ const ProductDetails = () => {
 
     const { addItem } = useCart();
 
+    const newprice =
+        product ? product.price + (
+            selectedSize === 'S' ? -2 : (selectedSize === 'L' ? 2 : (selectedSize === 'XL' ? 4 : 0))
+        ) : 0;
 
 
     return (
@@ -53,7 +57,7 @@ const ProductDetails = () => {
                     <View style={styles.whitebox}>
                         <Image src={product?.image} style={styles.image} />
                         <Text style={styles.title}>{product?.name}</Text>
-                        <Text style={styles.price}>${product?.price}</Text>
+                        <Text style={styles.price}>${newprice.toFixed(2)}</Text>
                     </View>
                     <View
                         style={styles.divider}
