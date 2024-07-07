@@ -1,15 +1,18 @@
-import { Link, Stack } from 'expo-router';
-import { StyleSheet, Text, View } from 'react-native';
+import { Stack, router } from 'expo-router';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 export default function Profile() {
   return (
     <View style={styles.container}>
       <Stack.Screen options={{ headerTitle: 'Profile', headerRight: () => null }} />
-      <View style={styles.box}>
-        <Link href="/pages/orders" style={styles.title}>Orders</Link>
-      </View>
-      <View style={styles.box}>
-        <Link href="/pages/settings" style={styles.title}>Settings</Link>
-      </View>
+      <Pressable onPressOut={() => router.push('/pages/orders/')} style={styles.box}>
+        <Text style={styles.title}>Orders</Text>
+      </Pressable>
+      <Pressable onPressOut={() => router.push('/pages/settings/')} style={styles.box}>
+        <Text style={styles.title}>Settings</Text>
+      </Pressable>
+      <Pressable onPressOut={() => router.push('/(admin)/')} style={styles.box}>
+        <Text style={styles.title}>Admin</Text>
+      </Pressable>
     </View>
   );
 }
