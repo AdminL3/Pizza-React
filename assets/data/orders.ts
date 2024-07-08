@@ -58,7 +58,7 @@ const orders: Order[] = [
         id: 1,
         order_id: 23445,
         size: 'M',
-        quantity: 1,
+        quantity: 3,
         product_id: products[3].id,
         products: products[3],
       },

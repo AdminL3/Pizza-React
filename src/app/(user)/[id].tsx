@@ -4,7 +4,6 @@ import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import products from '@assets/data/products';
 import { TabBarIcon } from '@/app/(user)/_layout';
 import CustomButton from '@/components/CustomButton';
-
 import { useCart } from '@/provider/CartProvider';
 import { PizzaSize } from '@/types';
 

@@ -1,11 +1,10 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { Stack } from 'expo-router';
+import { Link, Stack, useSegments } from 'expo-router';
 import { Order } from '@/types';
 
 
 const OrderItem = ({ order }: { order: Order }) => {
-
     const getTimeSinceOrder = (created_at: string) => {
         const now = new Date().getTime();
         const orderTime = new Date(created_at).getTime();
@@ -21,17 +20,22 @@ const OrderItem = ({ order }: { order: Order }) => {
     }
 
     return (
-        <View style={styles.container}>
-            <Stack.Screen options={{ headerShown: false }} />
-            <View style={styles.left}>
-                <Text style={styles.text}>Order: #{order.id}</Text>
-                <Text style={styles.subtext}>{getTimeSinceOrder(order.created_at)}</Text>
-            </View>
-            <View style={styles.right}>
-                <Text style={styles.subtext}>Status:</Text>
-                <Text style={styles.text}>{order.status}</Text>
-            </View>
-        </View>
+        <Link href={`/pages/orders/${order.id}`} asChild>
+            <Pressable>
+                <View style={styles.container}>
+                    <Stack.Screen options={{ headerShown: false }} />
+                    <View style={styles.left}>
+                        <Text style={styles.text}>Order: #{order.id}</Text>
+                        <Text style={styles.subtext}>{getTimeSinceOrder(order.created_at)}</Text>
+                    </View>
+                    <View style={styles.right}>
+                        <Text style={styles.subtext}>Status:</Text>
+                        <Text style={styles.text}>{order.status}</Text>
+                    </View>
+                </View>
+            </Pressable>
+        </Link>
+
     )
 }
 
