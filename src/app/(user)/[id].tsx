@@ -23,7 +23,7 @@ const ProductDetails = () => {
         addItem(product, selectedSize, text);
         setText('');
         scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: true });
-        router.push('/cart');
+        router.push('/pages/cart');
     };
 
 

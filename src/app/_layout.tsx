@@ -4,7 +4,6 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
-import { useColorScheme } from '@components/useColorScheme';
 import CartProvider from '@/provider/CartProvider';
 
 export {
@@ -45,14 +44,13 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-  const colorScheme = useColorScheme();
 
   return (
     <CartProvider>
       <Stack>
         <Stack.Screen name="(user)" options={{ headerShown: false }} />
         <Stack.Screen name="(admin)" options={{ headerShown: false }} />
-        <Stack.Screen name="cart" options={{ presentation: 'modal' }} />
+        <Stack.Screen name="pages/cart" options={{ presentation: 'modal' }} />
         <Stack.Screen name="pages/orders" options={{ title: 'Orders' }} />
       </Stack>
     </CartProvider>

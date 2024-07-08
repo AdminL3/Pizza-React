@@ -33,8 +33,8 @@ export default function TabLayout() {
         headerShown: true,
         headerTintColor: 'white',
         headerTitleAlign: 'center',
-        headerRight: (focused) => (
-          <Link href="/cart" asChild>
+        headerRight: () => (
+          <Link href="/pages/cart" asChild>
             <Pressable>
               {({ pressed }) => (
                 <TabBarIcon

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Redirect, Stack } from 'expo-router';
+import { Redirect } from 'expo-router';
 const index = () => {
-    return (<Redirect href="/(auth)/sign_up" />)
+    return (<Redirect href="/(user)/index" />)
 };
 
 export default index;
