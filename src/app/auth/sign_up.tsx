@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Alert, ActivityIndicator } from 'react-native';
 import { Stack, useRouter } from 'expo-router';
 import CustomButton from '@components/CustomButton';
+import { supabase } from '@/lib/supabase';
 
 export const checkValidation = (password: string, confirmPassword: string, email: string) => {
     if (!email.includes('@')) {
@@ -47,13 +48,31 @@ const SignUp = () => {
     const router = useRouter();
 
     const handleSignUp = () => {
-        const validationResult = checkValidation(password, confirmPassword, email);
-        if (validationResult !== true) {
-            setError(validationResult);
-            return;
-        }
-        router.push('(user)');
+        // const validationResult = checkValidation(password, confirmPassword, email);
+        // if (validationResult !== true) {
+        //     setError(validationResult);
+        //     return;
+        // }
+        signUpWithEmail();
     };
+
+
+    const [loading, setLoading] = useState(false);
+    async function signUpWithEmail() {
+        setLoading(true);
+        const { error } = await supabase.auth.signUp({
+            email: email,
+            password: password,
+        });
+        if (error) {
+            Alert.alert(error.message);
+        } else {
+            router.push('(user)');
+        }
+        setLoading(false);
+    }
+
+
 
     return (
         <View style={styles.container}>
@@ -87,11 +106,19 @@ const SignUp = () => {
                 placeholderTextColor="#8c8c8c"
             />
             <View style={styles.btn}>
-                <CustomButton text="Sign Up" onPress={handleSignUp} style={styles.customButton} />
+                <CustomButton
+                    text={loading ? "Signing Up..." : "Sign Up"}
+                    disabled={loading}
+                    onPress={handleSignUp}
+                    style={styles.customButton} />
             </View>
-            <Text style={styles.signup} onPress={() => router.push('/pages/orders/')}>
-                {/* Already have an account? Sign In */}go to orders
-            </Text>
+            <View style={{ marginTop: 20 }}>
+                {loading ? <ActivityIndicator size="small" color="#ffffff" /> :
+                    <Text style={styles.signup} onPress={() => router.push('/auth/sign_in')}>
+                        Already have an account? Sign In
+                    </Text>
+                }
+            </View>
             <Text style={styles.error}>
                 {error}
             </Text>
@@ -142,3 +169,4 @@ const styles = StyleSheet.create({
 });
 
 export default SignUp;
+

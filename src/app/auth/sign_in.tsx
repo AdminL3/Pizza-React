@@ -1,24 +1,30 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Alert, ActivityIndicator } from 'react-native';
 import { Stack, useRouter } from 'expo-router';
 import CustomButton from '@components/CustomButton';
-import { checkValidation } from './sign_up';
+import { supabase } from '@/lib/supabase';
 
 const SignIn = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const router = useRouter();
+    const [loading, setLoading] = useState(false);
 
-    const handleSignIn = () => {
-        const validationResult = checkValidation(password, password, email);
-        if (validationResult !== true) {
-            setError(validationResult);
-            return;
+    const handleSignIn = async () => {
+        setLoading(true);
+        const { error } = await supabase.auth.signInWithPassword({
+            email: email,
+            password: password,
+        });
+
+        if (error) {
+            Alert.alert(error.message);
+        } else {
+            router.push('(user)');
         }
-        router.push('(user)');
+        setLoading(false);
     };
-
     return (
         <View style={styles.container}>
             <Stack.Screen options={{
@@ -43,11 +49,21 @@ const SignIn = () => {
                 placeholderTextColor="#8c8c8c"
             />
             <View style={styles.btn}>
-                <CustomButton text="Sign In" onPress={handleSignIn} style={styles.customButton} />
+
+                <CustomButton
+                    disabled={loading}
+                    text={loading ? "Signing In..." : "Sign In"}
+                    onPress={handleSignIn}
+                    style={styles.customButton}
+                />
             </View>
-            <Text style={styles.signup} onPress={() => router.push('/(auth)/sign_up')}>
-                Don't have an account? Sign Up
-            </Text>
+            <View style={{ marginTop: 20 }}>
+                {loading ? <ActivityIndicator size="small" color="#ffffff" /> :
+                    <Text style={styles.signup} onPress={() => router.push('/auth/sign_up')}>
+                        Don't have an account? Sign Up
+                    </Text>
+                }
+            </View>
             <Text style={styles.error}>
                 {error}
             </Text>
