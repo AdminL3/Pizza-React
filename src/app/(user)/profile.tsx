@@ -1,17 +1,25 @@
+import { supabase } from '@/lib/supabase';
 import { Stack, router } from 'expo-router';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 export default function Profile() {
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    router.push('/');
+  }
   return (
     <View style={styles.container}>
       <Stack.Screen options={{ headerTitle: 'Profile', headerRight: () => null }} />
-      <Pressable onPressOut={() => router.push('/pages/orders/')} style={styles.box}>
+      <Pressable onPressIn={() => router.push('/pages/orders/')} style={styles.box}>
         <Text style={styles.title}>Orders</Text>
       </Pressable>
-      <Pressable onPressOut={() => router.push('/pages/settings/')} style={styles.box}>
+      <Pressable onPressIn={() => router.push('/pages/settings/')} style={styles.box}>
         <Text style={styles.title}>Settings</Text>
       </Pressable>
-      <Pressable onPressOut={() => router.push('/(admin)/')} style={styles.box}>
+      <Pressable onPressIn={() => router.push('/(admin)/')} style={styles.box}>
         <Text style={styles.title}>Admin</Text>
+      </Pressable>
+      <Pressable onPressIn={handleSignOut} style={styles.box}>
+        <Text style={styles.title}>Sign Out</Text>
       </Pressable>
     </View>
   );

@@ -1,9 +1,10 @@
 import React from 'react';
-import { Link, router, Tabs } from 'expo-router';
+import { Link, Redirect, router, Tabs } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { type IconProps } from '@expo/vector-icons/build/createIconSet';
 import { type ComponentProps } from 'react';
 import { Pressable } from 'react-native';
+import { useAuth } from '@/provider/AuthProvider';
 
 export function TabBarIcon({ style, ...rest }: IconProps<ComponentProps<typeof Ionicons>['name']>) {
   return <Ionicons size={28} style={[{ marginBottom: -3 }, style]} {...rest} />;
@@ -11,6 +12,10 @@ export function TabBarIcon({ style, ...rest }: IconProps<ComponentProps<typeof I
 
 export default function TabLayout() {
 
+  const { session } = useAuth();
+  if (!session) {
+    return <Redirect href="/auth/sign_in" />;
+  }
   return (
     <Tabs
       screenOptions={{
